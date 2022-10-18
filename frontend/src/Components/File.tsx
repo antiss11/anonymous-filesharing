@@ -1,10 +1,6 @@
-interface Props {
-  name: string;
-  uploadedDate: string;
-  size: string;
-}
+import {IFile} from "./LastUploadedFiles";
 
-function File({name, uploadedDate, size}: Props) {
+function File({name, uploadedDate, size}: IFile) {
   return (
     <div className="bg-white p-3 rounded-xl">
       <a className="underline italic text-blue-600 cursor-pointer hover:text-blue-800">
