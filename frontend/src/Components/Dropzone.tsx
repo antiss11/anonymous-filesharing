@@ -1,4 +1,8 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useRef,
+} from 'react';
 import {
   FileError,
   FileRejection,
@@ -88,7 +92,7 @@ export default function Dropzone({ handleDrop, file }: Props) {
     [],
   );
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     maxFiles: 1,
     onDrop,
   });
@@ -107,13 +111,14 @@ export default function Dropzone({ handleDrop, file }: Props) {
     >
       <div {...getRootProps({ className: 'dropzone py-16 cursor-pointer' })}>
         <input {...getInputProps()} />
-        <div>
+        <div className="h-12">
           <p
             className={clsx(
               'px-3',
               'word-wrap',
               file ? 'text-black/100' : 'text-black-40',
               file ? 'font-bold' : 'font-normal',
+              isDragActive ? 'text-black/30 text-sm' : null,
             )}
           >
             {file ? file.path : 'Drop file here, or click to select'}
