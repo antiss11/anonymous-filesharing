@@ -86,6 +86,7 @@ export default function Dropzone({ handleDrop, file }: Props) {
         setError(errorObj);
         onErrorAnimation();
       } else {
+        setError(null);
         handleDrop(files[0]);
       }
     },
@@ -111,7 +112,7 @@ export default function Dropzone({ handleDrop, file }: Props) {
     >
       <div {...getRootProps({ className: 'dropzone py-16 cursor-pointer' })}>
         <input {...getInputProps()} />
-        <div className="h-12">
+        <div className="h-12 flex items-center justify-center flex-col">
           <p
             className={clsx(
               'px-3',
