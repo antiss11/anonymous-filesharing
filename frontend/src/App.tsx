@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { UploadForm, SubmitEvent } from './Components/UploadForm';
 import './App.css';
+import files from './testData';
+import LastUploadedFiles from './Components/LastUploadedFiles';
+import { IFile } from './Components/Dropzone';
 
 function App() {
+  const [currentFile, setCurrentFile] = useState<IFile>(null);
+
+  const handleSubmit = (e: SubmitEvent) => {
+    e.preventDefault();
+    console.log(currentFile);
+  };
+
+  const handleDrop = (file: any) => {
+    setCurrentFile(file);
+  };
+
+  const filesData = JSON.parse(files);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App md:flex h-screen">
+      <div className="bg-yellow-200 flex flex-col items-center justify-center md:w-1/2">
+        <UploadForm handleSubmit={handleSubmit} handleDrop={handleDrop} file={currentFile} />
+      </div>
+      <LastUploadedFiles files={filesData} />
     </div>
   );
 }
